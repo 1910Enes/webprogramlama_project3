@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Üye Kayıt Formu</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+        background-image: url('background.jpg');
+        font-family: Arial, sans-serif;
+        background-color: #523131;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(69, 2, 2, 0.1);
+    }
+    h2 {
+        text-align: center;
+        color: #763434;
+    }
+    label {
+        color: #763535;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#kaydetBtn").click(function(){
+        var eposta = $("#eposta").val();
+        var ad = $("#ad").val();
+        var soyad = $("#soyad").val();
+        var cepTelefonu = $("#cepTelefonu").val();
+        var sifre = $("#sifre").val();
+        var sifreTekrar = $("#sifreTekrar").val();
+        
+        // Eposta format kontrolü
+        var epostaFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!epostaFormat.test(eposta)) {
+            alert("Lütfen geçerli bir e-posta adresi giriniz.");
+            return false;
+        }
+        
+        // Diğer alanların boş kontrolü
+        if (ad === "" || soyad === "" || cepTelefonu === "" || sifre === "" || sifreTekrar === "") {
+            alert("Lütfen tüm alanları doldurunuz.");
+            return false;
+        }
+        
+        // Şifre eşleşme kontrolü
+        if (sifre !== sifreTekrar) {
+            alert("Girdiğiniz şifreler birbiriyle eşleşmiyor.");
+            return false;
+        }
+        
+        // Başarılı ise bilgileri göster ve sayfayı yönlendir
+        var bilgiler = "E-posta: " + eposta + "\n";
+        bilgiler += "Ad: " + ad + "\n";
+        bilgiler += "Soyad: " + soyad + "\n";
+        bilgiler += "Cep Telefonu: " + cepTelefonu;
+        alert(bilgiler);
+        window.location.href = "page2.html";
+    });
+});
+</script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Üye Kayıt Formu</h2>
+    <form id="uyeForm">
+        <div class="form-group">
+            <label for="eposta">E-posta:</label>
+            <input type="email" class="form-control" id="eposta" name="eposta">
+        </div>
+
+        <div class="form-group">
+            <label for="ad">Ad:</label>
+            <input type="text" class="form-control" id="ad" name="ad">
+        </div>
+
+        <div class="form-group">
+            <label for="soyad">Soyad:</label>
+            <input type="text" class="form-control" id="soyad" name="soyad">
+        </div>
+
+        <div class="form-group">
+            <label for="cepTelefonu">Cep Telefonu:</label>
+            <input type="tel" class="form-control" id="cepTelefonu" name="cepTelefonu">
+        </div>
+
+        <div class="form-group">
+            <label for="sifre">Şifre:</label>
+            <input type="password" class="form-control" id="sifre" name="sifre">
+        </div>
+
+        <div class="form-group">
+            <label for="sifreTekrar">Şifre Tekrar:</label>
+            <input type="password" class="form-control" id="sifreTekrar" name="sifreTekrar">
+        </div>
+
+        <button type="button" class="btn btn-primary" id="kaydetBtn">Kaydet</button>
+    </form>
+</div>
+
+</body>
+</html>
